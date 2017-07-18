@@ -16,7 +16,11 @@
                     <%= link_to image_tag("http://placehold.it/370x210"), restaurant %>
                   <% end %>
                 </a>
-                <span class="prop-tag">For Sale</span>
+                <% if restaurant.reviews.present? %>
+                  <span class="prop-tag star-rating" data-score=<%= restaurant.reviews.average(:rating).round(2) %>></span>
+                <% else %>
+                  <span class="prop-tag">No reviews yet!</span>
+                <% end %>
                 <div class="prop-info">
                   <h3 class="prop-title"><%= link_to restaurant.name, restaurant %></h3>
                   <ul class="more-info clearfix">
