@@ -65,7 +65,11 @@
                   <div class="holder">
                     <a class="overlay" title="property title" href="#">
                       <span class="more"></span>
-                      <%= link_to image_tag("http://placehold.it/370x210"), restaurant %>
+                      <% if restaurant.image.blank? %>
+                        <%= link_to image_tag("http://placehold.it/370x210"), restaurant %>
+                      <% else %>
+                        <%= link_to image_tag(restaurant.image), restaurant %>
+                      <% end %>
                     </a>
                     <% if restaurant.reviews.present? %>
                       <span class="prop-tag star-rating" data-score=<%= restaurant.reviews.average(:rating).round(2) %>></span>
