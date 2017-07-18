@@ -1,0 +1,247 @@
+
+
+    <!-- end header -->
+    <div id="home-search-container">
+      <div class="container">
+        <div class="row">
+          <div class="span12">
+            <div class="widget pull-right">
+              <div class="row">
+                <div class="span12 head-container">
+                <div class="row">
+                  <div class="span8 hidden-phone">
+                    <h2 class="head-title">Welcome to Realto</h2>
+                    <p class="head-message"><strong>Realto xHTML/CSS Template is The Best Solution To Sell House Online.</strong><br />
+                    This template is appropriate for Real Estate Company, who need to do their business online via websites.</p>
+                    <%= link_to 'Write a Review', new_restaurant_path, class:"btn btn-large btn-realto span3 header-cta" %>
+                  </div>
+                  <div class="span4" style="padding-bottom: 150px;">
+                    <div class="search-form">
+                      <p>Find your new home</p>
+                      <%= form_tag search_restaurants_path, method: :get do |f| %>
+                        <%= text_field_tag :search, nil, placeholder: "steaks, burgers, hot dogs, etc." %>
+                        <%= text_field_tag :location, nil, placeholder: "denver, miami, etc." %>
+                        <%= select_tag :category, options_for_select(Category.all.map { |c| [c.name, c.id]}) %>
+                        <%= submit_tag 'Search', class: "btn span2 btn-realto-form btn-large" %>
+                      <% end %>
+                    </div>
+                    <!-- .search-form -->   
+                  </div>
+                  <!-- .span4 -->
+                </div>
+              </div>        
+              </div>
+              <!-- .row -->
+            </div>
+            <!-- .search-holder -->
+          </div>
+          <!-- .span12 -->
+        </div>
+        <!-- .row -->
+      </div>
+      <!-- .container -->
+    </div>
+    <div id="latest-properties">
+      <div class="container">
+      <div class="row">
+        <div class="span12">
+        <h2 class="secion-title">RESTAURANTS</h2>
+        </div>
+      </div>
+      
+      <!-- Begin Carousel -->
+      <div class="row">
+        <div id="realto-carousel" class="carousel slide span12">
+          <div class="carousel-navigation pull-right">
+          <%= link_to "View all", search_restaurants_path, class: "serif italic pull-left view-all-carousel" %>
+          <a class="left carousel-control pull-left" href="#realto-carousel" data-slide="prev">‹</a>
+          <a class="right carousel-control pull-right" href="#realto-carousel" data-slide="next">›</a>
+          </div>
+          <div class="carousel-inner">
+            <div class="item active">
+              <ul class="thumbnails">
+                <% @restaurant.last(3).each do |restaurant| %>
+                <li class="span4 box-container">
+                  <div class="holder">
+                    <a class="overlay" title="property title" href="#">
+                      <span class="more"></span>
+                      <%= link_to image_tag("http://placehold.it/370x210"), restaurant %>
+                    </a>
+                    <span class="prop-tag">For Sale</span>
+                    <div class="prop-info">
+                      <h3 class="prop-title"><%= link_to restaurant.name, restaurant %></h3>
+                      <ul class="more-info clearfix">
+                        <li class="info-label clearfix"><span class="pull-left">Location:</span> <span class="qty pull-right"><%= restaurant.city %>, <%= restaurant.state %></span></li>
+                        <li class="info-label clearfix"><span class="pull-left">Category:</span> <span class="qty pull-right"><%= restaurant.category.name %></span></li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+                <% end %>
+              </ul>
+            </div><!-- .item -->
+            <div class="item">
+              <ul class="thumbnails">
+                <% @restaurant.order(:id).reverse_order.limit(3).offset(3).each do |restaurant| %>
+                <li class="span4 box-container">
+                <div class="holder">
+                    <a class="overlay" title="property title" href="#">
+                    <span class="more"></span>
+                    <%= link_to image_tag("http://placehold.it/370x210"), restaurant %>
+                    </a>
+                    <span class="prop-tag">For Rent</span>
+                    <div class="prop-info">
+                      <h3 class="prop-title"><%= link_to restaurant.name, restaurant %></h3>
+                      <ul class="more-info clearfix">
+                        <li class="info-label clearfix"><span class="pull-left">Location:</span> <span class="qty pull-right"><%= restaurant.city %>, <%= restaurant.state %></span></li>
+                        <li class="info-label clearfix"><span class="pull-left">Category:</span> <span class="qty pull-right"><%= restaurant.category.name %></span></li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+                <% end %>
+              </ul>
+            </div><!-- .item -->
+               
+          </div><!-- .carousel-inner -->
+        </div>
+      </div><!--End Carousel-->
+      
+      </div><!-- .container  -->
+    </div><!-- #latest-properties  -->
+    <!-- #latest-properties  -->
+    <div class="container">
+      <div class="row">
+        <div class="home-bottom-top">
+          <% @category.each do |category| %>
+            <div class="span4">
+              <div class="info-box">
+                <h2 class="secion-title"><%= category.name %></h2>
+                <% category.restaurants.limit(5).each do |restaurant| %>
+                  <ul class="more-info clearfxix">
+                    <li class="info-label clearfix"><%=link_to restaurant.name, restaurant %>
+                      <% if restaurant.reviews.present? %>
+                        <span class="qty pull-right star-rating" data-score=<%= restaurant.reviews.average(:rating).round(2) %>></span>
+                      <% else %>
+                        <span class="qty pull-right">No Reviews yet!</span>
+                      <% end %>
+                    </li>
+                  </ul>
+                <% end %>
+                <%= link_to "Continue &raquo;".html_safe, continue_restaurants_path(category_id: category.id), class:"serif italic" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="span12 box-container">
+          <div class="row adv-message clearfix">
+            <div class="pull-left span7">
+              <p class="upper-line serif italic">Realto xHTML/CSS Template is The
+                Best Solution To Sell House Online</p>
+              <p class="lower-line">This template is appropriate for Real Estate
+                Company, who need to do their business online via websites.</p>
+            </div>
+            <!-- .pull-left -->
+            <a class="pull-right btn btn-large btn-realto span3" href="#" title="Buy It Now">Buy
+              It Now!</a>
+          </div>
+          <!-- .adv-message  -->
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="span8">
+          <h2 class="secion-title">Meet our agents</h2>
+          <div class="row">
+            <div class="span2">
+              <div class="home-agents widget">
+                <a class="overlay" href="#" title="agent name">
+                  <span class="more"></span>
+                  <img alt="image" class="media-object" src="images/agent-01.jpg" />
+                </a>
+                <p class="home-agent-name">John Doe</p>
+                <a class="serif italic" href="#" title="View profile page">View profile
+                  page &raquo;</a>
+              </div>
+              <!-- .home-agents -->
+            </div>
+            <div class="span2">
+              <div class="home-agents widget">
+                <a class="overlay" href="#" title="agent name">
+                  <span class="more"></span>
+                  <img alt="image" class="media-object" src="images/agent-02.jpg" />
+                </a>
+                <p class="home-agent-name">Susan Underwood</p>
+                <a class="serif italic" href="#" title="View profile page">View profile
+                  page &raquo;</a>
+              </div>
+              <!-- .home-agents -->
+            </div>
+            <div class="span2">
+              <div class="home-agents widget">
+                <a class="overlay" href="#" title="agent name">
+                  <span class="more"></span>
+                  <img alt="image" class="media-object" src="images/agent-06.jpg" />
+                </a>
+                <p class="home-agent-name">Erik Peterson</p>
+                <a class="serif italic" href="#" title="View profile page">View profile
+                  page &raquo;</a>
+              </div>
+              <!-- .home-agents -->
+            </div>
+            <div class="span2">
+              <div class="home-agents widget">
+                <a class="overlay" href="#" title="agent name">
+                  <span class="more"></span>
+                  <img alt="image" class="media-object" src="images/agent-07.jpg" />
+                </a>
+                <p class="home-agent-name">Lu Jackson</p>
+                <a class="serif italic" href="#" title="View profile page">View profile
+                  page &raquo;</a>
+              </div>
+              <!-- .home-agents -->
+            </div>
+          </div>
+        </div>
+        <!-- .span8  -->
+        <div class="span4">
+          <div class="home-blog-articles widget">
+            <h2 class="secion-title">Articles from the Blog</h2>
+            <ul>
+              <li>
+                <i class="icon-caret-right"></i>
+                <a title="title" href="#">Lorem ipsum dolor sit amet, consectetur
+                  adipiscing</a></li>
+              <li>
+                <i class="icon-caret-right"></i>
+                <a title="title" href="#">Duis suscipit venenatis pellentesque tempor
+                  libero</a></li>
+              <li>
+                <i class="icon-caret-right"></i>
+                <a title="title" href="#">Etiam aliquet aliquam metus in tristique</a></li>
+              <li>
+                <i class="icon-caret-right"></i>
+                <a title="title" href="#">Cras venenatis pellentesque venenatis
+                  pellentesque</a></li>
+              <li>
+                <i class="icon-caret-right"></i>
+                <a title="title" href="#">Vivamus vitae venenatis pellentesque nunc sed
+                  nisl</a></li>
+              <li>
+                <i class="icon-caret-right"></i>
+                <a title="title" href="#">In tempus venenatis pellentesquetempor</a></li>
+              <li>
+                <i class="icon-caret-right"></i>
+                <a title="title" href="#">Suspendisse vulputate venenatis pellentesque
+                  quis</a></li>
+            </ul>
+          </div>
+        </div>
+        <!-- .span4  -->
+      </div>
+    </div>

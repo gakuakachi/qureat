@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <div class="span12">
+      <div class="box-container">
+        <div style="margin-left: auto; margin-right: auto; width: 16em;">
+          <h2 class="page-title", style="text-align: center;">Sign up</h2>
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+              <%= devise_error_messages! %>
+
+              <%= f.label :email %>
+              <%= f.email_field :email, autofocus: true %>
+
+              <%= f.label :first_name %>
+              <%= f.text_field :first_name %>
+
+              <%= f.label :last_name %>
+              <%= f.text_field :last_name %>
+
+              <%= f.label :password %>
+              <% if @minimum_password_length %>
+              <em>(<%= @minimum_password_length %> characters minimum)</em>
+              <% end %>
+              <%= f.password_field :password, autocomplete: "off" %>
+
+              <%= f.label :password_confirmation %>
+              <%= f.password_field :password_confirmation, autocomplete: "off" %>
+
+              <%= f.submit "Sign up" ,class: "btn span2 btn-realto-form btn-large"%>
+          <% end %>
+
+          <%= render "devise/shared/links" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

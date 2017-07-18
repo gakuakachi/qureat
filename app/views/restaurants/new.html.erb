@@ -1,0 +1,49 @@
+    <div class="container page-content">
+      <div class="row">
+        <div class="span8">
+          <div class="box-container">
+            <div class="padding30">
+              <h2 class="page-title">New Restaurant</h2>
+              <%= form_for(@restaurant) do |f| %>
+               <%= f.label :name %>
+               <%= f.text_field :name %>
+               <%= f.label :description %>
+               <%= f.text_area :description %><br />
+               <%= f.select :category_id, Category.all.map{|f| [f.name, f.id] } %>
+               <%= f.label :address1 %>
+               <%= f.text_field :address1 %>
+               <%= f.label :address2 %>
+               <%= f.text_field :address2 %>
+               <%= f.label :city %>
+               <%= f.text_field :city %>
+               <%= f.label :state %>
+               <%= f.text_field :state %>
+               <%= f.label :zipcode %>
+               <%= f.text_field :zipcode %>
+               <%= f.label :phone %>
+               <%= f.text_field :phone %>
+               <%= f.label :email %>
+               <%= f.text_field :email %><br />
+               <%= f.file_field :image %><br />
+               <%= f.submit class: "btn span3 btn-realto-form btn-large"%>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <!-- .span8 -->
+        <div class="span4 widget">
+          <div class="widget map box-container padding30">
+            <h3 class="widget-title">Get Directions</h3>
+            <iframe src="http://maps.google.it/maps?f=q&amp;source=s_q&amp;hl=it&amp;geocode=&amp;q=miami+beach+collins+ave+1220&amp;aq=&amp;sll=25.861386,-80.120888&amp;sspn=0.205136,0.347786&amp;ie=UTF8&amp;hq=&amp;hnear=1220+Collins+Ave,+Miami+Beach,+Miami-Dade,+Florida+33139,+Stati+Uniti&amp;t=m&amp;z=14&amp;ll=25.783255,-80.131265&amp;output=embed"></iframe>
+            <dl class="margin0">
+              <dt>Realto</dt>
+              <dd class="margin0">1680 Washington Avenue</dd>
+              <dd class="margin0">Miami Beach, FL 33139</dd>
+            </dl>
+          </div>
+        </div>
+        <!-- .span4 -->
+      </div>
+      <!-- .row -->
+    </div>
+    <!-- .container -->

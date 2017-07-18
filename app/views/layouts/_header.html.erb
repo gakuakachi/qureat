@@ -1,0 +1,50 @@
+    <!-- begin header -->
+    <header>
+      <div class="navbar navbar-inverse navbar-static-top ">
+        <div class="navbar-inner navbar-colored">
+          <div class="container">
+            <button class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse" type="button">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="nav-collapse collapse">
+              <ul class="nav">
+                <li>
+                  <%= link_to root_path do %>
+                    <i class="icon-home"></i>
+                  <% end %>
+                </li>
+                <li><%= link_to "About us", about_us_path %></li>
+                <li><%= link_to "Contact us", contact_us_path %></li>
+              </ul>
+            </div>
+            <!--/.nav-collapse -->
+          </div>
+        </div>
+      </div>
+      <div id="logo-container">
+        <div class="container">
+          <div class="row">
+            <div class="span8">
+              <span class="logo-text">
+                <%= link_to "Qureat", root_path, class: "brand" %>
+              </span>
+              <span class="tag-line hidden-phone">BEST RESTAURANT REVIEWS</span>
+            </div>
+            <div class="span4">
+              <ul class="list-inline pull-right">
+                <% if user_signed_in? %>
+                  <li><%= link_to "Edit Profile", edit_user_registration_path %></li>
+                  <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
+                <% else %>
+                  <li><%= link_to "Sign in", new_user_session_path %></li>
+                  <li><%= link_to "Sign up", new_user_registration_path %></li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- #logo-container -->
+    </header>  
